@@ -8,9 +8,13 @@ interface RecentNotesProps {
 }
 
 export function RecentNotes({ onNoteClick }: RecentNotesProps) {
-  const { data: recentNotes, isLoading } = useGetRecentNotes({
-    query: { queryKey: getGetRecentNotesQueryKey() }
-  });
+  const { data, isLoading } = useGetRecentNotes({
+  query: { queryKey: getGetRecentNotesQueryKey() }
+});
+
+const recentNotes = Array.isArray(data)
+  ? data
+  : data?.data || data?.notes || [];
 
   if (isLoading) {
     return (

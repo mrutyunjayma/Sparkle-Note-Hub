@@ -58,17 +58,21 @@ export function NoteDialog({ open, onOpenChange, noteId }: NoteDialogProps) {
   const [customTagInput, setCustomTagInput] = useState("");
 
   const { data: note, isLoading: isLoadingNote } = useGetNote(noteId || "", {
-    query: {
-      enabled: isEditing && open,
-      queryKey: noteId ? getGetNoteQueryKey(noteId) : ["null"],
-    },
-  });
+  query: {
+    enabled: isEditing && open,
+    queryKey: noteId ? getGetNoteQueryKey(noteId) : ["null"],
+  },
+});
 
-  const { data: allTagsData } = useGetAllTags({
-    query: { queryKey: getGetAllTagsQueryKey() },
-  });
+const { data: allTagsRaw } = useGetAllTags({
+  query: { queryKey: getGetAllTagsQueryKey() },
+});
 
-  const existingTags = allTagsData?.map((t) => t.tag) ?? [];
+const allTagsData = Array.isArray(allTagsRaw)
+  ? allTagsRaw
+  : (allTagsRaw as any)?.data || (allTagsRaw as any)?.tags || [];
+
+const existingTags = allTagsData.map((t: { tag: string }) => t.tag);
 
   const createNote = useCreateNote();
   const updateNote = useUpdateNote();

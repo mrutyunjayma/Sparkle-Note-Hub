@@ -1,0 +1,136 @@
+--progress is a global compose flag, better use `docker compose --progress xx build ...
+#1 [internal] load local bake definitions
+#1 reading from stdin 995B done
+#1 DONE 0.0s
+
+#2 [api-server internal] load build definition from Dockerfile
+#2 transferring dockerfile: 30B
+#2 transferring dockerfile: 1.05kB done
+#2 DONE 0.0s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 789B done
+#3 DONE 0.0s
+
+#4 [frontend internal] load metadata for docker.io/library/node:20-slim
+#4 ...
+
+#5 [frontend internal] load metadata for docker.io/library/nginx:alpine
+#5 DONE 1.3s
+
+#4 [frontend internal] load metadata for docker.io/library/node:20-slim
+#4 DONE 1.4s
+
+#6 [frontend internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [frontend internal] load build context
+#7 transferring context: 33.87kB 0.0s done
+#7 DONE 0.0s
+
+#8 [frontend runtime 1/3] FROM docker.io/library/nginx:alpine@sha256:582c496ccf79d8aa6f8203a79d32aaf7ffd8b13362c60a701a2f9ac64886c93d
+#8 resolve docker.io/library/nginx:alpine@sha256:582c496ccf79d8aa6f8203a79d32aaf7ffd8b13362c60a701a2f9ac64886c93d 0.0s done
+#8 DONE 0.0s
+
+#9 [api-server base 1/2] FROM docker.io/library/node:20-slim@sha256:f93745c153377ee2fbbdd6e24efcd03cd2e86d6ab1d8aa9916a3790c40313a55
+#9 resolve docker.io/library/node:20-slim@sha256:f93745c153377ee2fbbdd6e24efcd03cd2e86d6ab1d8aa9916a3790c40313a55 0.0s done
+#9 DONE 0.0s
+
+#10 [frontend build 5/8] COPY lib/ ./lib/
+#10 CACHED
+
+#11 [frontend build 7/8] RUN pnpm install --frozen-lockfile
+#11 CACHED
+
+#12 [frontend build 3/8] COPY tsconfig.base.json tsconfig.json ./
+#12 CACHED
+
+#13 [frontend build 4/8] COPY .npmrc ./
+#13 CACHED
+
+#14 [frontend build 2/8] COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
+#14 CACHED
+
+#15 [frontend runtime 2/3] COPY --from=build /app/artifacts/sparkle-note-hub/dist/ /user/share/nginx/html/
+#15 CACHED
+
+#16 [frontend build 6/8] COPY artifacts/sparkle-note-hub/ ./artifacts/sparkle-note-hub/
+#16 CACHED
+
+#17 [frontend build 8/8] RUN PORT=3000 BASE_PATH=/ pnpm --filter @workspace/sparkle-note-hub run build
+#17 CACHED
+
+#18 [frontend runtime 3/3] COPY artifacts/sparkle-note-hub/nginx.conf /etc/nginx/conf.d/default.conf
+#18 CACHED
+
+#19 [api-server internal] load build context
+#19 transferring context: 9.36kB done
+#19 DONE 0.0s
+
+#20 [api-server build 2/8] COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
+#20 CACHED
+
+#21 [api-server build 3/8] COPY tsconfig.base.json tsconfig.json ./
+#21 CACHED
+
+#22 [api-server build 8/8] RUN pnpm --filter @workspace/api-server run build
+#22 CACHED
+
+#23 [api-server build 7/8] RUN pnpm install --frozen-lockfile
+#23 CACHED
+
+#24 [api-server build 5/8] COPY lib/ ./lib/
+#24 CACHED
+
+#25 [api-server build 6/8] COPY artifacts/api-server/ ./artifacts/api-server/
+#25 CACHED
+
+#26 [api-server runtime 2/5] WORKDIR /app
+#26 CACHED
+
+#27 [api-server build 1/8] WORKDIR /app
+#27 CACHED
+
+#28 [api-server runtime 4/5] COPY --from=build /app/node_modules ./node_modules
+#28 CACHED
+
+#29 [api-server build 4/8] COPY .npmrc ./
+#29 CACHED
+
+#30 [api-server base 2/2] RUN corepack enable
+#30 CACHED
+
+#31 [api-server runtime 3/5] COPY --from=build /app/artifacts/api-server/dist ./dist
+#31 CACHED
+
+#32 [api-server runtime 5/5] COPY --from=build /app/artifacts/api-server/package.json ./package.json
+#32 CACHED
+
+#33 [api-server] exporting to image
+#33 exporting layers done
+#33 exporting manifest sha256:9ea8b24697b49184b2dd6d3674a821c6bae0a3a7f8557394937dadb80c648f9b done
+#33 exporting config sha256:c26dea53f69e7005875ab5942e8a4ae7aa536eb72447c9cf1792080135b73ab3 0.0s done
+#33 exporting attestation manifest sha256:89044f856a91d107052cc256364762b1a588ffcf20223f9bf479698d2dcf4185 0.0s done
+#33 exporting manifest list sha256:755e41edca36ebd3b87cb803f0464ee512b4bd4e31b984e3ac9368583ff888ee 0.0s done
+#33 naming to docker.io/library/sparkle-note-api-server:latest done
+#33 unpacking to docker.io/library/sparkle-note-api-server:latest 0.0s done
+#33 DONE 0.1s
+
+#34 [frontend] exporting to image
+#34 exporting layers done
+#34 exporting manifest sha256:25eb3cefadc4e4e224065bd2d7973ca64443ef616d04b4133abd260f7880ff4f done
+#34 exporting config sha256:f1f41afddf3418dce80116d9e0226d2b48c979c9905726d8f9dc96764241b213 done
+#34 exporting attestation manifest sha256:c5f447acf407c636cd6e9bcb66b3deb035182c5156438b9f63c1364bc642359d 0.0s done
+#34 exporting manifest list sha256:b3011c3e4db31b8bec1855b99c45b74dddb2d5828a24b792d998ad77fcad60a2 0.0s done
+#34 naming to docker.io/library/sparkle-note-frontend:latest done
+#34 unpacking to docker.io/library/sparkle-note-frontend:latest 0.0s done
+#34 DONE 0.1s
+
+#35 [frontend] resolving provenance for metadata file
+#35 DONE 0.0s
+
+#36 [api-server] resolving provenance for metadata file
+#36 DONE 0.0s
+ sparkle-note-frontend  Built
+ sparkle-note-api-server  Built
