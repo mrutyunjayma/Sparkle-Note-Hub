@@ -47,3 +47,10 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+terraform/infra/terraform.tfstate
+terraform/infra/terraform.tfstate.1777654621.backup
+terraform/infra/terraform.tfstate.backup
+.terraform/
+*.tfstate
+*.tfstate.*
