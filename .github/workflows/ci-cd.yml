@@ -140,7 +140,7 @@ jobs:
       - name: Checkout GitOps Repo
         uses: actions/checkout@v4
         with:
-          repository: your-username/sparkle-note-gitops
+          repository: mrutyunjayma/sparkle-note-gitops
           token: ${{ secrets.GH_PAT }}
           path: gitops
 

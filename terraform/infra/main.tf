@@ -35,14 +35,22 @@ module "eks_node_group" {
   node_role_arn = module.iam.node_role_arn
   subnet_ids    = module.vpc.private_subnets
 
-  depends_on = [module.eks_cluster,module.iam]
+  depends_on = [module.eks_cluster, module.iam]
+}
+
+module "eks_addons" {
+  source = "./modules/eks_addons"
+
+  cluster_name = module.eks_cluster.cluster_name
+
+  depends_on = [module.eks_node_group]
 }
 
 module "irsa" {
-  source = "./modules/irsa"
-  cluster_name = var.cluster_name
-  oidc_provider_arn  = module.eks_cluster.oidc_provider_arn
-  oidc_provider_url  = module.eks_cluster.oidc_provider_url
+  source            = "./modules/irsa"
+  cluster_name      = var.cluster_name
+  oidc_provider_arn = module.eks_cluster.oidc_provider_arn
+  oidc_provider_url = module.eks_cluster.oidc_provider_url
 }
 
 module "ecr" {
