@@ -1,4 +1,4 @@
-import { useGetRecentNotes, getGetRecentNotesQueryKey } from "@workspace/api-client-react";
+import { useGetRecentNotes, getGetRecentNotesQueryKey, type Note, } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Clock } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
@@ -12,9 +12,7 @@ export function RecentNotes({ onNoteClick }: RecentNotesProps) {
   query: { queryKey: getGetRecentNotesQueryKey() }
 });
 
-const recentNotes = Array.isArray(data)
-  ? data
-  : data?.data || data?.notes || [];
+const recentNotes: Note[] = Array.isArray(data) ? data : [];
 
   if (isLoading) {
     return (
