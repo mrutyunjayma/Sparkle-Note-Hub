@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useListNotes, getListNotesQueryKey, useGetAllTags, getGetAllTagsQueryKey } from "@workspace/api-client-react";
+import { useListNotes, getListNotesQueryKey, useGetAllTags, getGetAllTagsQueryKey, type Note,
+type TagCount, } from "@workspace/api-client-react";
 import { useDebounce } from "@/hooks/use-debounce";
 import { NoteCard } from "@/components/note-card";
 import { NoteDialog } from "@/components/note-dialog";
@@ -29,17 +30,13 @@ export default function Dashboard() {
   { query: { queryKey: getListNotesQueryKey({ search: debouncedSearch, tag: selectedTag, pinned: showPinnedOnly || undefined }) } }
 );
 
-const notes = Array.isArray(notesData)
-  ? notesData
-  : (notesData as any)?.data || (notesData as any)?.notes || [];
+const notes: Note[] = Array.isArray(notesData) ? notesData : [];
 
 const { data: allTagsData, isLoading: isLoadingTags } = useGetAllTags({
   query: { queryKey: getGetAllTagsQueryKey() },
 });
 
-const allTags = Array.isArray(allTagsData)
-  ? allTagsData
-  : (allTagsData as any)?.data || (allTagsData as any)?.tags || [];
+const allTags: TagCount[] = Array.isArray(allTagsData) ? allTagsData : [];
   const handleCreateNote = () => {
     setEditingNoteId(null);
     setIsDialogOpen(true);
