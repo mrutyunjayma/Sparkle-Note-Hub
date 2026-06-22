@@ -80,6 +80,12 @@ jobs:
       - name: Load Frontend Image
         run: docker load -i frontend.tar
 
+        ##Add a debug step
+      - name: Find picomatch version
+        run: |
+          docker run --rm backend:${{ needs.build.outputs.tag }} \
+          sh -c "find /app -name package.json | xargs grep -H 'picomatch' || true"
+
       - name: Scan Backend Image
         uses: aquasecurity/trivy-action@v0.36.0
         with:
