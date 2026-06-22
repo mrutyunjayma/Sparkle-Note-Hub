@@ -21,7 +21,7 @@ RUN pnpm --filter @workspace/api-server run build
 RUN pnpm deploy --filter @workspace/api-server --prod --legacy /app/deploy
 
 # Production image
-FROM node:20-slim AS runtime
+FROM node:22-slim AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
