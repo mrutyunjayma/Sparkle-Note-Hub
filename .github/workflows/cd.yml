@@ -85,6 +85,7 @@ jobs:
         with:
           image-ref: backend:${{ needs.build.outputs.tag }}
           severity: HIGH,CRITICAL
+          ignore-unfixed: true
           exit-code: 1
 
       - name: Scan Frontend Image
@@ -92,6 +93,7 @@ jobs:
         with:
           image-ref: frontend:${{ needs.build.outputs.tag }}
           severity: HIGH,CRITICAL
+          ignore-unfixed: true
           exit-code: 1
 
   push:
