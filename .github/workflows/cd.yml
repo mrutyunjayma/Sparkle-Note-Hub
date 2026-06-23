@@ -86,6 +86,19 @@ jobs:
           docker run --rm backend:${{ needs.build.outputs.tag }} \
           sh -c "find /app -name package.json | xargs grep -H 'picomatch' || true"
 
+      - name: Trivy JSON Report
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: backend:${{ needs.build.outputs.tag }}
+          format: json
+          output: trivy.json
+
+      - name: Upload Trivy Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: trivy.json
+
       - name: Scan Backend Image
         uses: aquasecurity/trivy-action@v0.36.0
         with:
