@@ -21,7 +21,7 @@ RUN pnpm --filter @workspace/api-server run build
 RUN pnpm deploy --filter @workspace/api-server --prod --legacy /app/deploy
 
 # Production image
-FROM node:22-slim AS runtime
+FROM gcr.io/distroless/nodejs22-debian12
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
@@ -34,4 +34,4 @@ COPY --from=build /app/deploy ./
 # Expose the port that the api-server will run on
 EXPOSE 8080
 # Set the command to run the api-server
-CMD ["node", "--enable-source-maps", "dist/index.mjs"]
+CMD ["dist/index.mjs"]
