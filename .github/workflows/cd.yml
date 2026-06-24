@@ -186,16 +186,7 @@ jobs:
       with:
         payload: |
           {
-          "text": "🚀 *Sparkle Note CD Pipeline*\n
-          • Build: ${{ needs.build.result }}\n
-          • Image Scan: ${{ needs.image-scan.result }}\n
-          • Push: ${{ needs.push.result }}\n
-          • GitOps: ${{ needs.gitops.result }}\n
-          • Branch: ${{ github.ref_name }}\n
-          • Commit: ${{ github.sha }}\n
-          • Run Number: #${{ github.run_number }}\n
-          • Actor: ${{ github.actor }}\n
-          • Workflow Run:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          "text": "🚀 *Sparkle Note CD Pipeline*\n• Build: ${{ needs.build.result }}\n• Image Scan: ${{ needs.image-scan.result }}\n• Push: ${{ needs.push.result }}\n• GitOps: ${{ needs.gitops.result }}\n• Branch: ${{ github.ref_name }}\n• Commit: ${{ github.sha }}\n• Run Number: #${{ github.run_number }}\n• Actor: ${{ github.actor }}\n• Workflow Run:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }
 
       env:
