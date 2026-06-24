@@ -21,7 +21,7 @@ RUN pnpm --filter @workspace/api-server run build
 RUN pnpm deploy --filter @workspace/api-server --prod --legacy /app/deploy
 
 # Production image
-FROM gcr.io/distroless/nodejs22-debian12
+FROM gcr.io/distroless/nodejs22-debian12:latest
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
