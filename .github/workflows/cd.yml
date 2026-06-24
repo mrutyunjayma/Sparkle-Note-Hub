@@ -81,10 +81,10 @@ jobs:
         run: docker load -i frontend.tar
 
         ##Add a debug step
-      - name: Find picomatch version
-        run: |
-          docker run --rm backend:${{ needs.build.outputs.tag }} \
-          sh -c "find /app -name package.json | xargs grep -H 'picomatch' || true"
+      # - name: Find picomatch version
+      #   run: |
+      #     docker run --rm backend:${{ needs.build.outputs.tag }} \
+      #     sh -c "find /app -name package.json | xargs grep -H 'picomatch' || true"
 
       - name: Trivy JSON Report
         uses: aquasecurity/trivy-action@v0.36.0
