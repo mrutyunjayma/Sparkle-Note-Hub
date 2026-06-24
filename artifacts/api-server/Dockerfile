@@ -21,10 +21,14 @@ RUN pnpm --filter @workspace/api-server run build
 RUN pnpm deploy --filter @workspace/api-server --prod --legacy /app/deploy
 
 # Production image
-FROM gcr.io/distroless/nodejs22-debian12:latest
+FROM node:22-bookworm-slim AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
+
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy the built api-server package and its dependencies from the build stage
 COPY --from=build /app/deploy ./
@@ -34,4 +38,4 @@ COPY --from=build /app/deploy ./
 # Expose the port that the api-server will run on
 EXPOSE 8080
 # Set the command to run the api-server
-CMD ["dist/index.mjs"]
+CMD ["node", "--enable-source-maps", "dist/index.mjs"]
