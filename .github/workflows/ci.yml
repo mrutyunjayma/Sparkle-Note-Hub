@@ -56,7 +56,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "🔍 CI Pipeline\nTest: ${{ needs.test.result }}\nFS Scan: ${{ needs.fs-scan.result }}\nPR: ${{ github.event.pull_request.title }}\nCommit: ${{ github.sha }}"
+            "text": "🚀 *Sparkle Note CI Pipeline*\n• Image Scan: SUCCESS\n• Branch: ${{ github.ref_name }}\n• Commit: ${{ github.sha }}\n• Run Number: #${{ github.run_number }}\n• Actor: ${{ github.actor }}\n• Workflow Run:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
