@@ -24,7 +24,11 @@ module "eks_cluster" {
 module "secrets" {
   source       = "./modules/secrets-manager"
   name         = "sparkle-note-secrets"
-  secret_value = "your-sensitive-data"
+  secret_value = jsonencode({
+    MONGODB_URI     = "mongodb+srv://mrutyunjaymasanta03_db_user:mj-admin_sparkle-note@sparkle-note.4pqt3rc.mongodb.net/?appName=sparkle-note"
+    MONGODB_DB_NAME = "sparkle-note"
+    DATABASE_URL    = "mongodb+srv://mrutyunjaymasanta03_db_user:mj-admin_sparkle-note@sparkle-note.4pqt3rc.mongodb.net/?appName=sparkle-note"
+  })
 }
 
 
